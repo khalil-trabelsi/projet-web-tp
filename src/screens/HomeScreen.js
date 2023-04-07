@@ -1,5 +1,5 @@
 import { axios } from "axios";
-import { transformDate } from "../utils";
+import { hideLoading, showLoading, transformDate } from "../utils";
 const HomeScreen = {
   after_render: async () => {
     const trending_section = document.querySelector(".trending .container");
@@ -40,16 +40,15 @@ const HomeScreen = {
       }
     };
     // Get all trending movies info
+    showLoading();
     const response = await fetch('https://api.themoviedb.org/3/trending/all/week?api_key=688cd3e93675b6046cd154e9d6daf187', options);
     if (!response || !response.ok) {
       return `<div>Error in getting data</div>`
     }
     const movies = await response.json();
+    hideLoading()
     console.log(movies)
-    let m_test = [];
-    for (let i = 0; i < 6; i++) {
-      m_test.push(movies.results[i])
-    }
+
 
 
 
@@ -79,17 +78,17 @@ const HomeScreen = {
       <div class="container"> 
       <i class="fa-solid fa-angle-left left" type="button"></i>
 
-      ${movies.results.sort((a, b) => a.vote_average - b.vote_average).reverse().map(movie => {
+      ${movies.results.map(movie => {
       return `  
-      <div class="box">
+      <a class="box" href="/#/movie/${movie.id}">
       <img src="https://image.tmdb.org/t/p/w1280//${movie.backdrop_path}" alt="" />
   
       <div class="info">
       <h4>${movie.title ? movie.title : movie?.name}</h4>
-        <span class="movie-date">${movie.release_date ? transformDate(movie.release_date) : transformDate(movie.first_air_date)}</span>
+        <span class="movie-date">${movie.release_date ? transformDate(movie.release_date).fulldate : transformDate(movie.first_air_date).fulldate}</span>
         <span class="rate">${movie.vote_average.toFixed(1)}</span>
       </div>
-    </div>`
+    </a>`
     }).join("")}
     <i class="fa-solid fa-angle-right arrowRightBtn right"></i>
 
