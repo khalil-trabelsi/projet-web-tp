@@ -495,7 +495,7 @@ header .main-nav > li > a:hover::before {
 .trending .container .box:hover .info i {
   animation: arrow-move 0.6s linear infinite;
 }
-.trending .rate {
+.rate {
   position: absolute;
   height: 40px;
   background-color: gold;
@@ -1047,8 +1047,7 @@ footer .copyright {
   margin-bottom: 40px;
 }
 .recommendation .recHeader {
-  display: flex;
-  justify-content: space-between;
+  margin-bottom: 20px;
 }
 .recommendation .actions button {
   padding: 8px;
@@ -1056,11 +1055,9 @@ footer .copyright {
   cursor: pointer;
 }
 .recommendation .wrapper {
-  display: flex;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  padding-left: 15px;
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px; 
 }
 .contentBox {
   min-width: calc(100% / 4);
@@ -1068,7 +1065,7 @@ footer .copyright {
   height: 400px;
   margin-right: 5px;
 }
-.item:hover::before {
+/* .item:hover::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -1079,20 +1076,26 @@ footer .copyright {
   border: 2px solid red;
   z-index: -1;
   opacity: 0;
-}
+} */
 .recommendation .wrapper .item {
   width: 100%;
   height: 100%;
   transition: all 0.5s;
 }
-.recommendation .wrapper .item:hover {
+.recommendation .wrapper .item:hover .info .icon {
+  display: flex;
 }
 .recommendation .wrapper .item img {
   height: 100%;
   width: 100%;
   margin-bottom: 10px;
-}
+  border-radius: 8px;
+  transition: all 0.4s;
 
+}
+.recommendation .wrapper .item:hover img {
+  opacity: 0.4;
+} 
 .recommendation .wrapper .item .info h4 {
   padding-left: 10px;
   padding-bottom: 10px;
@@ -1104,4 +1107,50 @@ footer .copyright {
   left: 0;
   color: white;
   z-index: 2;
+}
+
+.recommendation .wrapper .item .info .icon {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  width: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 60px;
+  font-size: 40px;
+  left: 0;
+  color: white;
+  z-index: 2;
+  transition: all 0.4s;
+}
+
+
+.recommendation .wrapper .extraContent {
+  position:absolute;
+}
+.recommendation .rate {
+  position:absolute;
+  /* top: 5px; */
+  left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .movie {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .movie .backdrops {
+    flex-basis: 250px;
+    height: 350px;
+
+  }
+  .movie .backdrops img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+
+  }
 }

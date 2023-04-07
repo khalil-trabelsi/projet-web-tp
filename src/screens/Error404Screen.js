@@ -1,4 +1,7 @@
 const Error404Screen = {
+    after_render: async() =>  {
+        
+    },
     render: () => {
         return `<div>
         <strong>404.</strong><span>That's an error</span>

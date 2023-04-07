@@ -110,14 +110,7 @@ const MovieScreen = {
             <section class="recommendation container">
             <div class="recHeader">
             <h2>Recommendations</h2>
-            <div class="actions">
-                <button class="">
-                <i class="fa-solid fa-angle-left"></i>
-                </button>
-                <button class="">
-                <i class="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
+      
             </div>
             <div class="wrapper">
 
@@ -129,9 +122,14 @@ const MovieScreen = {
                 
                     <div class="info">
                     <h4>${rec.title ? rec.title : rec?.name}</h4>
-                
+                    <span class="rate">
+                    ${movie.vote_average.toFixed(1)}
+                    </span>
+                    <i class="fa-regular fa-circle-play icon"></i>
                     </div>
                  </a>
+       
+
                 </div>
                                 
                                   
