@@ -23,7 +23,8 @@ const MovieScreen = {
         // get trailer video
         const video = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=688cd3e93675b6046cd154e9d6daf187&language=en-US`, options);
         let videoJson = await video.json();
-        let trailerVideo = videoJson?.results.filter(video => video.name.includes("Official Trailer"));
+        console.log("video", videoJson.results)
+        let trailerVideo = videoJson?.results.filter(video => video.name.includes("Trailer"));
         console.log(trailerVideo)
         // get recommendations
         const recommendations = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=688cd3e93675b6046cd154e9d6daf187&language=en-US`, options)
@@ -31,16 +32,10 @@ const MovieScreen = {
         console.log(recommendationsJson);
         console.log(movie);
         return `
-        <section class="container">
-            <a href="" className="a">
-            <i class="fa-solid fa-house"></i>
-            Home
-            </a>
 
-        </section>
         <section class="container  movie"> 
             <div class="backdrops">
-            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.backdrop_path}"  />
+            <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.backdrop_path || movie.poster_path}"  />
             </div>
             <div class="mainContent">
             <div class="description">
@@ -118,7 +113,7 @@ const MovieScreen = {
                 return `        
                 <div class="contentBox">        
                     <a class="item" href="/#/movie/${rec.id}" >
-                    <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2//${rec.backdrop_path}" alt="" />
+                    <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2//${rec.backdrop_path || rec.poster_path}" alt="" />
                 
                     <div class="info">
                     <h4>${rec.title ? rec.title : rec?.name}</h4>
